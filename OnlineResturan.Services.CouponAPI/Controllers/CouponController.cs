@@ -74,6 +74,36 @@ namespace OnlineRestaurant.Services.CouponAPI.Controllers
             }
         }
 
+        [HttpGet("GetByCode/{code}")]
+        public async Task<ActionResult<ResponseDto>> GetByCode(string code)
+        {
+            try
+            {
+                var coupon = await _dbContext.Coupons.FirstOrDefaultAsync(c => c.CouponCode == code);
+                if (coupon == null)
+                {
+                    return NotFound(new ResponseDto
+                    {
+                        IsSuccess = false,
+                        Message = "Coupon not found."
+                    });
+                }
+                var responseDto = new ResponseDto
+                {
+                    Result = _mapper.Map<CouponDto>(coupon),
+                };
+                return Ok(responseDto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseDto
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                });
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<ResponseDto>> Create([FromBody] CouponDto couponDto)
         {
