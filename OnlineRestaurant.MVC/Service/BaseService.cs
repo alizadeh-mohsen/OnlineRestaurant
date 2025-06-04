@@ -2,7 +2,6 @@
 using OnlineRestaurant.MVC.Enums;
 using OnlineRestaurant.MVC.Models;
 using OnlineRestaurant.MVC.Service.IService;
-using System;
 using System.Net;
 using System.Text;
 
@@ -23,6 +22,8 @@ namespace OnlineRestaurant.MVC.Service
             {
                 var httpClient = _httpClientFactory.CreateClient("OnlineRestaurantAPI");
 
+                HttpResponseMessage? apiResponse = null;
+
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
 
@@ -33,8 +34,6 @@ namespace OnlineRestaurant.MVC.Service
                         Encoding.UTF8, "application/json");
                 }
 
-                HttpResponseMessage? apiResponse = null;
-
                 message.Method = requestDto.ApiType switch
                 {
                     ApiType.POST => HttpMethod.Post,
@@ -44,18 +43,17 @@ namespace OnlineRestaurant.MVC.Service
                 };
 
                 apiResponse = await httpClient.SendAsync(message);
+                var response = await apiResponse.Content.ReadAsStringAsync();
 
                 if (apiResponse.IsSuccessStatusCode)
                 {
-                    var apiContent = await apiResponse.Content.ReadAsStringAsync();
-                    var apiResponseDto = JsonConvert.DeserializeObject<ResponseDto>(apiContent);
+                    var apiResponseDto = JsonConvert.DeserializeObject<ResponseDto>(response);
                     return apiResponseDto;
                 }
-                var errorResponse = await apiResponse.Content.ReadAsStringAsync();
                 return new ResponseDto
                 {
                     IsSuccess = false,
-                    Message = errorResponse,
+                    Message = response,
                     StatusCode = apiResponse.StatusCode
                 };
             }

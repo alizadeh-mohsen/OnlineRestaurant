@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineRestaurant.Services.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineRestaurant.MVC", "OnlineRestaurant.MVC\OnlineRestaurant.MVC.csproj", "{7BF259EF-004E-4E87-BEDB-611CAC4395AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineRestaurant.Services.AuthAPI", "OnlineRestaurant.Services.AuthAPI\OnlineRestaurant.Services.AuthAPI.csproj", "{35FD1CE7-9EE4-4CE0-88CF-5F18F90F91B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{7BF259EF-004E-4E87-BEDB-611CAC4395AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BF259EF-004E-4E87-BEDB-611CAC4395AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BF259EF-004E-4E87-BEDB-611CAC4395AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35FD1CE7-9EE4-4CE0-88CF-5F18F90F91B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35FD1CE7-9EE4-4CE0-88CF-5F18F90F91B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35FD1CE7-9EE4-4CE0-88CF-5F18F90F91B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35FD1CE7-9EE4-4CE0-88CF-5F18F90F91B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9AF2FCA7-A1C3-4F85-93CA-4EEE07513161} = {A90656CD-9F3C-400E-A836-151550E4664A}
 		{7BF259EF-004E-4E87-BEDB-611CAC4395AB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{35FD1CE7-9EE4-4CE0-88CF-5F18F90F91B0} = {A90656CD-9F3C-400E-A836-151550E4664A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EB64403-7B6F-4090-9A8F-D6A0E2A8FDB5}

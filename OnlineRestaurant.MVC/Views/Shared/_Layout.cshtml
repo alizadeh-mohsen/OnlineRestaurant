@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OnlineRestaurant.MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/OnlineRestaurant.MVC.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    
 </head>
 <body>
     <header>
@@ -29,7 +31,7 @@
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+                                Content Management
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-action="Index" asp-controller="Coupon" >Coupon</a></li>
@@ -46,6 +48,7 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            @* <partial name="_Notifications" /> *@
         </main>
     </div>
 

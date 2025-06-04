@@ -22,11 +22,12 @@ namespace OnlineRestaurant.MVC.Controllers
 
             if (response.IsSuccess)
             {
+                TempData["success"] = response.Message;
                 coupons = JsonConvert.DeserializeObject<List<CouponDto>>(Convert.ToString(response.Result));
             }
             else
             {
-                ModelState.AddModelError(string.Empty, response.Message);
+               TempData["error"] = response.Message;
             }
 
             return View(coupons);
@@ -51,11 +52,12 @@ namespace OnlineRestaurant.MVC.Controllers
             var response = await _couponService.CreateCouponAsync(couponDto);
             if (response.IsSuccess)
             {
-                TempData["success"] = "Coupon created successfully.";
-                return RedirectToAction(nameof(Index));
+                TempData["success"] = "The villa has been created successfully";
+                return RedirectToAction("Index");
             }
             else
             {
+                TempData["error"] = response.Message;
                 ModelState.AddModelError(string.Empty, response.Message);
             }
 
@@ -76,10 +78,12 @@ namespace OnlineRestaurant.MVC.Controllers
             try
             {
                 var response = await _couponService.UpdateCouponAsync(couponDto);
+                TempData["success"] = response.IsSuccess ? "Coupon updated successfully." : response.Message;
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+               TempData["error"] = "An error occurred while updating the coupon.";
                 return View();
             }
         }
@@ -98,10 +102,12 @@ namespace OnlineRestaurant.MVC.Controllers
             try
             {
                 await _couponService.DeleteCouponAsync(id);
+                TempData["success"] = "Coupon deleted successfully.";
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                TempData["error"] = "An error occurred while deleting the coupon."; 
                 return View();
             }
         }
@@ -109,6 +115,11 @@ namespace OnlineRestaurant.MVC.Controllers
         private async Task<CouponDto> GetCouponById(int id)
         {
             var response = await _couponService.GetCouponByIdAsync(id);
+            if(!response.IsSuccess)
+            {
+                TempData["error"] = response.Message;
+                return null; // Return an empty CouponDto if not found
+            }
             return JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(response.Result));
 
         }
