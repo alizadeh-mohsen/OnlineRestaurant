@@ -1,6 +1,6 @@
-﻿namespace OnlineRestaurant.MVC.Enums
+﻿namespace OnlineRestaurant.MVC.Utils
 {
-    public enum ApiType
+    public enum ApiTypeEnum
     {
         GET,
         POST,

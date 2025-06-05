@@ -51,14 +51,14 @@ namespace OnlineRestaurant.Services.AuthAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "864f1156-a9b6-43ec-b385-bf026ef9c5b5",
+                            Id = "1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f27d5862-aa17-42eb-85bd-9c6ee8d7ad26",
-                            Name = "customer",
+                            Id = "2",
+                            Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
                 });
@@ -148,6 +148,13 @@ namespace OnlineRestaurant.Services.AuthAPI.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -235,6 +242,25 @@ namespace OnlineRestaurant.Services.AuthAPI.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "919c9a88-6da0-46a0-9fac-5b9b39bd437c",
+                            Email = "admin@restaurant.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            Name = "Admin User",
+                            NormalizedEmail = "ADMIN@RESTAURANT.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP68rsZpRS8BIttT9Qx3W3s/DOmsKlJb/mWqU75NNfoEGal1AZf/fgMzF7LadP2ynA==",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

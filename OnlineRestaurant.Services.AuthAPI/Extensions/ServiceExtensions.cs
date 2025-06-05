@@ -9,19 +9,19 @@ namespace OnlineRestaurant.Services.AuthAPI.Extensions
 {
     public static class ServiceExtensions
     {
-        public static IServiceCollection RegisterServices(this IServiceCollection services,WebApplicationBuilder builder)
+        public static WebApplicationBuilder RegisterCustomServices(this WebApplicationBuilder builder)
         {
-            services.AddDbContext<AppDbContext>(options =>
+            builder.Services.AddDbContext<AppDbContext>(options =>
              options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
-            services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiConfigs:JwtOptions"));
+            builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
-            return services;
-        }   
+            return builder;
+        }
     }
 }

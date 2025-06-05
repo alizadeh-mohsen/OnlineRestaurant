@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using OnlineRestaurant.MVC.Models;
+using OnlineRestaurant.MVC.Models.Coupon;
 using OnlineRestaurant.MVC.Models.Dto;
 
 namespace OnlineRestaurant.MVC.AutoMapper

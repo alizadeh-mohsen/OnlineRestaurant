@@ -8,23 +8,25 @@ namespace OnlineRestaurant.Services.AuthAPI.Controllers
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
-
         private readonly IAuthService _authService;
+        protected ResponseDto _responseDto;
 
         public AuthController(IAuthService authService)
         {
             _authService = authService;
+            _responseDto = new ResponseDto();
         }
 
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
         {
-            var response = await _authService.Login(loginRequestDto);
+            var loginResponseDto = await _authService.Login(loginRequestDto);
 
-            if (response != null && !string.IsNullOrEmpty(response.Token))
+            if (loginResponseDto != null && !string.IsNullOrEmpty(loginResponseDto.Token))
             {
-                return Ok(response);
+                _responseDto.Result = loginResponseDto;
+                return Ok(_responseDto);
             }
 
             return BadRequest(new ResponseDto

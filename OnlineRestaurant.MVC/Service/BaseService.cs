@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
-using OnlineRestaurant.MVC.Enums;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using OnlineRestaurant.MVC.Models;
 using OnlineRestaurant.MVC.Service.IService;
+using OnlineRestaurant.MVC.Utils;
 using System.Net;
 using System.Text;
 
@@ -10,13 +11,15 @@ namespace OnlineRestaurant.MVC.Service
     public class BaseService : IBaseService
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ITokenProvider _tokenProvider;
 
-        public BaseService(IHttpClientFactory httpClientFactory)
+        public BaseService(IHttpClientFactory httpClientFactory, ITokenProvider tokenProvider)
         {
             _httpClientFactory = httpClientFactory;
+            _tokenProvider = tokenProvider;
         }
 
-        public async Task<ResponseDto> SendAsync(RequestDto requestDto)
+        public async Task<ResponseDto> SendAsync(RequestDto requestDto, bool sendToken = true)
         {
             try
             {
@@ -26,7 +29,15 @@ namespace OnlineRestaurant.MVC.Service
 
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
-
+              
+                if(sendToken)
+                {
+                    var token = _tokenProvider.GetToken();
+                    if (!string.IsNullOrEmpty(token))
+                    {
+                        message.Headers.Add("Authorization", $"Bearer {token}");
+                    }
+                }
                 message.RequestUri = new Uri(requestDto.Url);
                 if (requestDto.Data != null)
                 {
@@ -36,24 +47,25 @@ namespace OnlineRestaurant.MVC.Service
 
                 message.Method = requestDto.ApiType switch
                 {
-                    ApiType.POST => HttpMethod.Post,
-                    ApiType.PUT => HttpMethod.Put,
-                    ApiType.DELETE => HttpMethod.Delete,
+                    ApiTypeEnum.POST => HttpMethod.Post,
+                    ApiTypeEnum.PUT => HttpMethod.Put,
+                    ApiTypeEnum.DELETE => HttpMethod.Delete,
                     _ => HttpMethod.Get
                 };
 
                 apiResponse = await httpClient.SendAsync(message);
-                var response = await apiResponse.Content.ReadAsStringAsync();
-
-                if (apiResponse.IsSuccessStatusCode)
+                if (apiResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    var apiResponseDto = JsonConvert.DeserializeObject<ResponseDto>(response);
+                    var apiContent = await apiResponse.Content.ReadAsStringAsync();
+                    var apiResponseDto = JsonConvert.DeserializeObject<ResponseDto>(apiContent);
+
                     return apiResponseDto;
                 }
+
                 return new ResponseDto
                 {
                     IsSuccess = false,
-                    Message = response,
+                    Message = apiResponse.ReasonPhrase,
                     StatusCode = apiResponse.StatusCode
                 };
             }

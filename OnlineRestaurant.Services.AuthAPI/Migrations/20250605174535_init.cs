@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace OnlineRestaurant.Services.AuthAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class initAuthAPI : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -160,7 +162,21 @@ namespace OnlineRestaurant.Services.AuthAPI.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c958a15d-0c40-4da5-b97e-5a45b58d4b17", null, "Admin", "ADMIN" });
+                values: new object[,]
+                {
+                    { "1", null, "Admin", "ADMIN" },
+                    { "2", null, "Customer", "CUSTOMER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "1", 0, "919c9a88-6da0-46a0-9fac-5b9b39bd437c", "admin@restaurant.com", true, false, null, "Admin User", "ADMIN@RESTAURANT.COM", "ADMIN", "AQAAAAIAAYagAAAAEP68rsZpRS8BIttT9Qx3W3s/DOmsKlJb/mWqU75NNfoEGal1AZf/fgMzF7LadP2ynA==", null, true, "", false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "1", "1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

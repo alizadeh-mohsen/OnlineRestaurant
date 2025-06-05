@@ -12,8 +12,8 @@ using OnlineRestaurant.Services.AuthAPI.Data;
 namespace OnlineRestaurant.Services.AuthAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250603204523_initAuthAPI")]
-    partial class initAuthAPI
+    [Migration("20250605174535_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,9 +54,15 @@ namespace OnlineRestaurant.Services.AuthAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c958a15d-0c40-4da5-b97e-5a45b58d4b17",
+                            Id = "1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
                         });
                 });
 
@@ -145,6 +151,13 @@ namespace OnlineRestaurant.Services.AuthAPI.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -232,6 +245,25 @@ namespace OnlineRestaurant.Services.AuthAPI.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "919c9a88-6da0-46a0-9fac-5b9b39bd437c",
+                            Email = "admin@restaurant.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            Name = "Admin User",
+                            NormalizedEmail = "ADMIN@RESTAURANT.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP68rsZpRS8BIttT9Qx3W3s/DOmsKlJb/mWqU75NNfoEGal1AZf/fgMzF7LadP2ynA==",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

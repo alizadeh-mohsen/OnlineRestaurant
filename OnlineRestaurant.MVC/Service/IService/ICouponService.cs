@@ -1,4 +1,5 @@
 ﻿using OnlineRestaurant.MVC.Models;
+using OnlineRestaurant.MVC.Models.Coupon;
 
 namespace OnlineRestaurant.MVC.Service.IService
 {

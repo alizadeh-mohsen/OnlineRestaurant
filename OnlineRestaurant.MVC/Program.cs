@@ -1,46 +1,37 @@
-using AutoMapper;
-using OnlineRestaurant.MVC.AutoMapper;
-using OnlineRestaurant.MVC.Helpers;
-using OnlineRestaurant.MVC.Service;
-using OnlineRestaurant.MVC.Service.IService;
+using OnlineRestaurant.MVC.Utils;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddHttpClient();
-builder.Services.AddHttpClient<ICouponService, CouponService>();
-Helper.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
-
-
-builder.Services.AddScoped<IBaseService, BaseService>();
-builder.Services.AddScoped<ICouponService, CouponService>();
-
-IMapper mapper = MappingConfigs.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+internal class Program
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        builder.Services.AddControllersWithViews();
+
+        builder.Services.RegisterServices(builder);
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (!app.Environment.IsDevelopment())
+        {
+            app.UseExceptionHandler("/Home/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+
+        app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();

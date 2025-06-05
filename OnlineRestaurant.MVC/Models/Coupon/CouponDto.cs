@@ -1,4 +1,4 @@
-﻿namespace OnlineRestaurant.MVC.Models
+﻿namespace OnlineRestaurant.MVC.Models.Coupon
 {
     public class CouponDto
     {

@@ -11,8 +11,8 @@ using OnlineRestaurant.Services.CouponAPI.Data;
 namespace OnlineRestaurant.Services.CouponAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250603204207_initAuthAPI")]
-    partial class initAuthAPI
+    [Migration("20250605174546_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

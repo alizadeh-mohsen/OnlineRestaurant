@@ -1,14 +1,17 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineRestaurant.Services.CouponAPI.Data;
 using OnlineRestaurant.Services.CouponAPI.Models;
 using OnlineRestaurant.Services.CouponAPI.Models.Dto;
+using OnlineRestaurant.Services.CouponAPI.Utils;
 
 namespace OnlineRestaurant.Services.CouponAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CouponController : ControllerBase
     {
         private readonly AppDbContext _dbContext;
@@ -105,6 +108,7 @@ namespace OnlineRestaurant.Services.CouponAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<ActionResult<ResponseDto>> Create([FromBody] CouponDto couponDto)
         {
             try
@@ -137,6 +141,7 @@ namespace OnlineRestaurant.Services.CouponAPI.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<ActionResult<ResponseDto>> Update(int id, [FromBody] CouponDto couponDto)
         {
             try
@@ -178,6 +183,7 @@ namespace OnlineRestaurant.Services.CouponAPI.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<ActionResult<ResponseDto>> Delete(int id)
         {
             try

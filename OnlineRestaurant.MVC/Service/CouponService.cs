@@ -1,5 +1,7 @@
 ﻿using OnlineRestaurant.MVC.Models;
+using OnlineRestaurant.MVC.Models.Coupon;
 using OnlineRestaurant.MVC.Service.IService;
+using OnlineRestaurant.MVC.Utils;
 
 namespace OnlineRestaurant.MVC.Service
 {
@@ -17,8 +19,8 @@ namespace OnlineRestaurant.MVC.Service
         {
             var response = await _baseService.SendAsync(new RequestDto
             {
-                ApiType = Enums.ApiType.GET,
-                Url = $"{Helpers.Helper.CouponAPIBase}/api/Coupon"
+                ApiType = ApiTypeEnum.GET,
+                Url = $"{Helper.CouponBaseApi}/api/Coupon"
             });
 
             return response;
@@ -27,8 +29,8 @@ namespace OnlineRestaurant.MVC.Service
         {
             return await _baseService.SendAsync(new RequestDto
             {
-                ApiType = Enums.ApiType.GET,
-                Url = $"{Helpers.Helper.CouponAPIBase}/api/Coupon/GetByCode/{couponCode}"
+                ApiType = ApiTypeEnum.GET,
+                Url = $"{Helper.CouponBaseApi}/api/Coupon/GetByCode/{couponCode}"
             });
         }
 
@@ -36,8 +38,8 @@ namespace OnlineRestaurant.MVC.Service
         {
             return await _baseService.SendAsync(new RequestDto
             {
-                ApiType = Enums.ApiType.GET,
-                Url = $"{Helpers.Helper.CouponAPIBase}/api/Coupon/{couponId}"
+                ApiType = ApiTypeEnum.GET,
+                Url = $"{Helper.CouponBaseApi}/api/Coupon/{couponId}"
             });
         }
 
@@ -46,8 +48,8 @@ namespace OnlineRestaurant.MVC.Service
         {
             return await _baseService.SendAsync(new RequestDto
             {
-                ApiType = Enums.ApiType.POST,
-                Url = $"{Helpers.Helper.CouponAPIBase}/api/Coupon",
+                ApiType = ApiTypeEnum.POST,
+                Url = $"{Helper.CouponBaseApi}/api/Coupon",
                 Data = couponDto
             });
         }
@@ -55,8 +57,8 @@ namespace OnlineRestaurant.MVC.Service
         {
             return await _baseService.SendAsync(new RequestDto
             {
-                ApiType = Enums.ApiType.PUT,
-                Url = $"{Helpers.Helper.CouponAPIBase}/api/Coupon/{couponDto.Id}",
+                ApiType = ApiTypeEnum.PUT,
+                Url = $"{Helper.CouponBaseApi}/api/Coupon/{couponDto.Id}",
                 Data = couponDto
             });
         }
@@ -65,8 +67,8 @@ namespace OnlineRestaurant.MVC.Service
         {
             return await _baseService.SendAsync(new RequestDto
             {
-                ApiType = Enums.ApiType.DELETE,
-                Url = $"{Helpers.Helper.CouponAPIBase}/api/Coupon/{couponId}"
+                ApiType = ApiTypeEnum.DELETE,
+                Url = $"{Helper.CouponBaseApi}/api/Coupon/{couponId}"
             });
         }
     }

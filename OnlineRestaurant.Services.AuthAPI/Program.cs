@@ -1,10 +1,6 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineRestaurant.Services.AuthAPI.Data;
 using OnlineRestaurant.Services.AuthAPI.Extensions;
-using OnlineRestaurant.Services.AuthAPI.Models;
-using OnlineRestaurant.Services.AuthAPI.Services;
-using OnlineRestaurant.Services.AuthAPI.Services.IService;
 
 internal class Program
 {
@@ -12,15 +8,11 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
-
-        builder.Services.RegisterServices(builder);
+        builder.RegisterCustomServices();
 
         builder.Services.AddControllers();
 
         var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
 
         app.UseHttpsRedirection();
 

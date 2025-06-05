@@ -1,8 +1,6 @@
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using OnlineRestaurant.Services.CouponAPI.AutoMapper;
 using OnlineRestaurant.Services.CouponAPI.Data;
+using OnlineRestaurant.Services.CouponAPI.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,20 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-IMapper mapper = MappingConfigs.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddDbContext<AppDbContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.AddCustomServices();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
