@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OnlineRestaurant.MVC.Models;
 using OnlineRestaurant.MVC.Service.IService;
 using OnlineRestaurant.MVC.Utils;
