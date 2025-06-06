@@ -1,26 +1,57 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using OnlineRestaurant.MVC.Models;
+using OnlineRestaurant.MVC.Models.Product;
+using OnlineRestaurant.MVC.Service.IService;
 using System.Diagnostics;
 
 namespace OnlineRestaurant.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IProductService _productService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IProductService productService)
         {
-            _logger = logger;
+            _productService = productService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+
+            var responseDto = await _productService.GetProductsAsync();
+            if (responseDto.IsSuccess)
+            {
+                var model = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(responseDto.Result));
+                return View(model);
+            }
+            else
+            {
+                TempData["error"] = responseDto.Message;
+            }
+
             return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+        [Authorize]
+        public async Task<IActionResult> Details(int id)
+        {
+            var response = await _productService.GetProductAsync(id);
+            if (response.IsSuccess)
+            {
+                var model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+                return View(model);
+            }
+            else
+            {
+                TempData["error"] = response.Message;
+                return View();
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

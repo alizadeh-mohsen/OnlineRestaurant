@@ -8,12 +8,14 @@ namespace OnlineRestaurant.MVC.Models.Product
         [Required]
         public string? Name { get; set; }
         public string? Description { get; set; }
-        [Required] 
+        [Required]
         public decimal Price { get; set; }
-        [Required] 
+        [Required]
         public string? ImageUrl { get; set; }
-        [Required] 
+        [Required]
         public int Discount { get; set; }
         public string? CategoryName { get; set; }
+        [Display(Name = "Count")]
+        public int OrderCount { get; set; }
     }
 }

@@ -11,7 +11,6 @@ namespace OnlineRestaurant.Services.ProductAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly AppDbContext _context;
