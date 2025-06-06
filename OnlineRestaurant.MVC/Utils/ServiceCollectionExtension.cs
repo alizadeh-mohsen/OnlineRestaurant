@@ -8,25 +8,29 @@ namespace OnlineRestaurant.MVC.Utils
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection RegisterServices(this IServiceCollection services, WebApplicationBuilder builder)
+        public static WebApplicationBuilder RegisterServices(this WebApplicationBuilder builder)
         {
-            services.AddHttpContextAccessor();
-            services.AddHttpClient();
-            services.AddHttpClient<ICouponService, CouponService>();
-            services.AddHttpClient<IAuthService, AuthService>();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddHttpClient();
+            builder.Services.AddHttpClient<ICouponService, CouponService>();
+            builder.Services.AddHttpClient<IAuthService, AuthService>();
+            builder.Services.AddHttpClient<IProductService, ProductService>();
 
-            Helper.CouponBaseApi = builder.Configuration["ServiceUrls:CouponAPI"];
-            Helper.AuthBaseApi = builder.Configuration["ServiceUrls:AuthAPI"];
+            var serviceUrls = builder.Configuration.GetSection("ServiceUrls");
+            Helper.AuthBaseApiUrl = serviceUrls.GetValue<string>("AuthAPI");
+            Helper.CouponBaseApiUrl = serviceUrls.GetValue<string>("CouponAPI");
+            Helper.ProductBaseApiUrl = serviceUrls.GetValue<string>("ProductAPI");
 
-            services.AddScoped<IBaseService, BaseService>();
-            services.AddScoped<ICouponService, CouponService>();
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<ITokenProvider, TokenProvider>();
+            builder.Services.AddScoped<IBaseService, BaseService>();
+            builder.Services.AddScoped<ICouponService, CouponService>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<ITokenProvider, TokenProvider>();
+            builder.Services.AddScoped<IProductService, ProductService>();
 
             IMapper mapper = MappingConfigs.RegisterMaps().CreateMapper();
-            services.AddSingleton(mapper);
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            builder.Services.AddSingleton(mapper);
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
                     options.ExpireTimeSpan = TimeSpan.FromHours(10);
@@ -34,7 +38,7 @@ namespace OnlineRestaurant.MVC.Utils
                     options.AccessDeniedPath = "/Auth/AccessDenied";
                 });
 
-            return services;
+            return builder;
         }
     }
 }

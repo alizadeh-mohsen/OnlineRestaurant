@@ -1,0 +1,27 @@
+@model OnlineRestaurant.MVC.Models.Product.ProductDto
+
+<h2>Product Details</h2>
+
+<div>
+
+    <div class="card" style="width: 48rem;">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="Image" />
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <h6 class="card-subtitle mb-2">
+                Price: @Model.Price.ToString("C")
+            </h6>
+            <h6 class="card-subtitle mb-2">
+                Discount:    @Model.Discount %
+            </h6>
+            <h6 class="card-subtitle mb-2">
+                Category:    @Model.CategoryName
+            </h6>
+            <p class="card-text">@Model.Description</p>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+

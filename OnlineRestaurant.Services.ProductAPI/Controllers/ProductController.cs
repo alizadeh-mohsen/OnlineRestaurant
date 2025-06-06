@@ -108,7 +108,7 @@ namespace OnlineRestaurant.Services.ProductAPI.Controllers
                 {
                     Result = _autoMapper.Map<ProductDto>(product),
                 };
-                return CreatedAtAction(nameof(Get), new { id = product.Id }, responseDto);
+                return Ok(responseDto);
             }
             catch (Exception ex)
             {

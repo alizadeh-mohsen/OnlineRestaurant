@@ -35,10 +35,10 @@ namespace OnlineRestaurant.Services.ProductAPI.Migrations
                 columns: new[] { "Id", "CategoryName", "Description", "Discount", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, "Fast Food", "Delicious cheese pizza", 0, "https://picsum.photos/seed/picsum/200/300", "Pizza", 9.99m },
-                    { 2, "Fast Food", "Juicy beef burger with lettuce and tomato", 0, "https://picsum.photos/seed/picsum/200/300", "Burger", 5.99m },
-                    { 3, "Italian", "Creamy Alfredo pasta with chicken", 0, "https://picsum.photos/seed/picsum/200/300", "Pasta", 12.99m },
-                    { 4, "Healthy", "Fresh garden salad with vinaigrette dressing", 0, "https://picsum.photos/seed/picsum/200/300", "Salad", 7.99m }
+                    { 1, "Fast Food", "Delicious cheese pizza", 0, "https://fastly.picsum.photos/id/64/4326/2884.jpg?hmac=9_SzX666YRpR_fOyYStXpfSiJ_edO3ghlSRnH2w09Kg", "Pizza", 9.99m },
+                    { 2, "Fast Food", "Juicy beef burger with lettuce and tomato", 0, "https://fastly.picsum.photos/id/65/4912/3264.jpg?hmac=uq0IxYtPIqRKinGruj45KcPPzxDjQvErcxyS1tn7bG0", "Burger", 5.99m },
+                    { 3, "Italian", "Creamy Alfredo pasta with chicken", 0, "https://fastly.picsum.photos/id/325/4928/3264.jpg?hmac=D_X6AKqCcH8IpWElX5X3dxx11yn7yYO-vPhiKhzRbwI", "Pasta", 12.99m },
+                    { 4, "Healthy", "Fresh garden salad with vinaigrette dressing", 0, "https://fastly.picsum.photos/id/230/1500/1500.jpg?hmac=heg53PqHqX88fhXrDyqlqJK8lLJXGRudsOXMKB3BZtc", "Salad", 7.99m }
                 });
         }
 

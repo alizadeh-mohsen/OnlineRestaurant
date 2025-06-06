@@ -58,7 +58,7 @@ namespace OnlineRestaurant.Services.ProductAPI.Migrations
                             CategoryName = "Fast Food",
                             Description = "Delicious cheese pizza",
                             Discount = 0,
-                            ImageUrl = "https://picsum.photos/seed/picsum/200/300",
+                            ImageUrl = "https://fastly.picsum.photos/id/64/4326/2884.jpg?hmac=9_SzX666YRpR_fOyYStXpfSiJ_edO3ghlSRnH2w09Kg",
                             Name = "Pizza",
                             Price = 9.99m
                         },
@@ -68,7 +68,7 @@ namespace OnlineRestaurant.Services.ProductAPI.Migrations
                             CategoryName = "Fast Food",
                             Description = "Juicy beef burger with lettuce and tomato",
                             Discount = 0,
-                            ImageUrl = "https://picsum.photos/seed/picsum/200/300",
+                            ImageUrl = "https://fastly.picsum.photos/id/65/4912/3264.jpg?hmac=uq0IxYtPIqRKinGruj45KcPPzxDjQvErcxyS1tn7bG0",
                             Name = "Burger",
                             Price = 5.99m
                         },
@@ -78,7 +78,7 @@ namespace OnlineRestaurant.Services.ProductAPI.Migrations
                             CategoryName = "Italian",
                             Description = "Creamy Alfredo pasta with chicken",
                             Discount = 0,
-                            ImageUrl = "https://picsum.photos/seed/picsum/200/300",
+                            ImageUrl = "https://fastly.picsum.photos/id/325/4928/3264.jpg?hmac=D_X6AKqCcH8IpWElX5X3dxx11yn7yYO-vPhiKhzRbwI",
                             Name = "Pasta",
                             Price = 12.99m
                         },
@@ -88,7 +88,7 @@ namespace OnlineRestaurant.Services.ProductAPI.Migrations
                             CategoryName = "Healthy",
                             Description = "Fresh garden salad with vinaigrette dressing",
                             Discount = 0,
-                            ImageUrl = "https://picsum.photos/seed/picsum/200/300",
+                            ImageUrl = "https://fastly.picsum.photos/id/230/1500/1500.jpg?hmac=heg53PqHqX88fhXrDyqlqJK8lLJXGRudsOXMKB3BZtc",
                             Name = "Salad",
                             Price = 7.99m
                         });

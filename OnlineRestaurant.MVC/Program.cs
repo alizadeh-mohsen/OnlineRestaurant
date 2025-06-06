@@ -9,7 +9,7 @@ internal class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
 
-        builder.Services.RegisterServices(builder);
+        builder.RegisterServices();
 
         var app = builder.Build();
 

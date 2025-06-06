@@ -10,7 +10,7 @@ namespace OnlineRestaurant.Services.ProductAPI.AutoMapper
         {
             var mappingConfigs = new MapperConfiguration(config =>
             {
-                config.CreateMap<Product, ProductDto>();
+                config.CreateMap<Product, ProductDto>().ReverseMap();
             });
             return mappingConfigs;
         }

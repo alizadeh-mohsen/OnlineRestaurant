@@ -20,7 +20,7 @@ namespace OnlineRestaurant.MVC.Service
             var response = await _baseService.SendAsync(new RequestDto
             {
                 ApiType = ApiTypeEnum.GET,
-                Url = $"{Helper.CouponBaseApi}/api/Coupon"
+                Url = $"{Helper.CouponBaseApiUrl}"
             });
 
             return response;
@@ -30,7 +30,7 @@ namespace OnlineRestaurant.MVC.Service
             return await _baseService.SendAsync(new RequestDto
             {
                 ApiType = ApiTypeEnum.GET,
-                Url = $"{Helper.CouponBaseApi}/api/Coupon/GetByCode/{couponCode}"
+                Url = $"{Helper.CouponBaseApiUrl}/GetByCode/{couponCode}"
             });
         }
 
@@ -39,7 +39,7 @@ namespace OnlineRestaurant.MVC.Service
             return await _baseService.SendAsync(new RequestDto
             {
                 ApiType = ApiTypeEnum.GET,
-                Url = $"{Helper.CouponBaseApi}/api/Coupon/{couponId}"
+                Url = $"{Helper.CouponBaseApiUrl}/{couponId}"
             });
         }
 
@@ -49,7 +49,7 @@ namespace OnlineRestaurant.MVC.Service
             return await _baseService.SendAsync(new RequestDto
             {
                 ApiType = ApiTypeEnum.POST,
-                Url = $"{Helper.CouponBaseApi}/api/Coupon",
+                Url = $"{Helper.CouponBaseApiUrl}",
                 Data = couponDto
             });
         }
@@ -58,7 +58,7 @@ namespace OnlineRestaurant.MVC.Service
             return await _baseService.SendAsync(new RequestDto
             {
                 ApiType = ApiTypeEnum.PUT,
-                Url = $"{Helper.CouponBaseApi}/api/Coupon/{couponDto.Id}",
+                Url = $"{Helper.CouponBaseApiUrl}/{couponDto.Id}",
                 Data = couponDto
             });
         }
@@ -68,7 +68,7 @@ namespace OnlineRestaurant.MVC.Service
             return await _baseService.SendAsync(new RequestDto
             {
                 ApiType = ApiTypeEnum.DELETE,
-                Url = $"{Helper.CouponBaseApi}/api/Coupon/{couponId}"
+                Url = $"{Helper.CouponBaseApiUrl}/{couponId}"
             });
         }
     }

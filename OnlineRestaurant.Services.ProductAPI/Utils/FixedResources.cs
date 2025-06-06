@@ -2,7 +2,7 @@
 {
     public class FixedResources
     {
-        public const string Admin = "ADMIN";
-        public const string Customer = "CUSTOMER";
+        public const string Admin = "Admin";
+        public const string Customer = "Customer";
     }
 }

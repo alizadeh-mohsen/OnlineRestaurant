@@ -22,7 +22,7 @@ namespace OnlineRestaurant.MVC.Service
             return await _baserService.SendAsync(new RequestDto
             {
                 ApiType = ApiTypeEnum.POST,
-                Url = $"{Helper.AuthBaseApi}/api/Auth/Login",
+                Url = $"{Helper.AuthBaseApiUrl}/Login",
                 Data = loginDto
             }, false);
 
@@ -33,7 +33,7 @@ namespace OnlineRestaurant.MVC.Service
             return _baserService.SendAsync(new RequestDto
             {
                 ApiType = ApiTypeEnum.POST,
-                Url = $"{Helper.AuthBaseApi}/api/Auth/Register",
+                Url = $"{Helper.AuthBaseApiUrl}/Register",
                 Data = registerDto
             }, false);
         }

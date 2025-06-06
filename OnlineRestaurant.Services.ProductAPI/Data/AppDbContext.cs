@@ -20,7 +20,7 @@ namespace OnlineRestaurant.Services.ProductAPI.Data
                 Description = "Delicious cheese pizza",
                 Price = 9.99m,
                 CategoryName = "Fast Food",
-                ImageUrl = "https://picsum.photos/seed/picsum/200/300"
+                ImageUrl = "https://fastly.picsum.photos/id/64/4326/2884.jpg?hmac=9_SzX666YRpR_fOyYStXpfSiJ_edO3ghlSRnH2w09Kg"
             },
             new Product
             {
@@ -29,7 +29,7 @@ namespace OnlineRestaurant.Services.ProductAPI.Data
                 Description = "Juicy beef burger with lettuce and tomato",
                 Price = 5.99m,
                 CategoryName = "Fast Food",
-                ImageUrl = "https://picsum.photos/seed/picsum/200/300"
+                ImageUrl = "https://fastly.picsum.photos/id/65/4912/3264.jpg?hmac=uq0IxYtPIqRKinGruj45KcPPzxDjQvErcxyS1tn7bG0"
             },
             new Product
             {
@@ -38,7 +38,7 @@ namespace OnlineRestaurant.Services.ProductAPI.Data
                 Description = "Creamy Alfredo pasta with chicken",
                 Price = 12.99m,
                 CategoryName = "Italian",
-                ImageUrl = "https://picsum.photos/seed/picsum/200/300"
+                ImageUrl = "https://fastly.picsum.photos/id/325/4928/3264.jpg?hmac=D_X6AKqCcH8IpWElX5X3dxx11yn7yYO-vPhiKhzRbwI"
             },
             new Product
             {
@@ -47,7 +47,7 @@ namespace OnlineRestaurant.Services.ProductAPI.Data
                 Description = "Fresh garden salad with vinaigrette dressing",
                 Price = 7.99m,
                 CategoryName = "Healthy",
-                ImageUrl = "https://picsum.photos/seed/picsum/200/300"
+                ImageUrl = "https://fastly.picsum.photos/id/230/1500/1500.jpg?hmac=heg53PqHqX88fhXrDyqlqJK8lLJXGRudsOXMKB3BZtc"
             });
         }
     }
