@@ -27,9 +27,8 @@ namespace OnlineRestaurant.MVC.Utils
             builder.Services.AddScoped<ITokenProvider, TokenProvider>();
             builder.Services.AddScoped<IProductService, ProductService>();
 
-            IMapper mapper = MappingConfigs.RegisterMaps().CreateMapper();
-            builder.Services.AddSingleton(mapper);
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            builder.Services.AddAutoMapper(typeof(MappingConfigs).Assembly);
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {

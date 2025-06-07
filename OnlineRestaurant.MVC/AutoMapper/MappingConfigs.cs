@@ -6,13 +6,9 @@ namespace OnlineRestaurant.MVC.AutoMapper
 {
     public class MappingConfigs : Profile
     {
-        public static MapperConfiguration RegisterMaps()
+        public MappingConfigs()
         {
-            var mappingConfigs = new MapperConfiguration(config =>
-            {
-                config.CreateMap<CouponViewModel, CouponDto>().ReverseMap();
-            });
-            return mappingConfigs;
+            CreateMap<CouponViewModel, CouponDto>().ReverseMap();
         }
     }
 }

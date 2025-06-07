@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineRestaurant.Services.CouponAPI.Data;
 
@@ -10,9 +11,11 @@ using OnlineRestaurant.Services.CouponAPI.Data;
 namespace OnlineRestaurant.Services.CouponAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250607152918_updated")]
+    partial class updated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +35,7 @@ namespace OnlineRestaurant.Services.CouponAPI.Migrations
                     b.Property<string>("CouponCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Discount")
+                    b.Property<double>("DiscountAmount")
                         .HasColumnType("float");
 
                     b.Property<double>("MinAmount")
@@ -47,14 +50,14 @@ namespace OnlineRestaurant.Services.CouponAPI.Migrations
                         {
                             Id = 1,
                             CouponCode = "10OFF",
-                            Discount = 10.0,
+                            DiscountAmount = 10.0,
                             MinAmount = 20.0
                         },
                         new
                         {
                             Id = 2,
                             CouponCode = "20OFF",
-                            Discount = 20.0,
+                            DiscountAmount = 20.0,
                             MinAmount = 50.0
                         });
                 });

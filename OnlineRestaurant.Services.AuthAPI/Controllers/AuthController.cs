@@ -5,7 +5,7 @@ using OnlineRestaurant.Services.AuthAPI.Services.IService;
 namespace OnlineRestaurant.Services.AuthAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/Auth")]
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;

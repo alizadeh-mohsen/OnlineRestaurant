@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string? CouponCode { get; set; }
-        public double DiscountAmount { get; set; }
+        public double Discount { get; set; }
         public double MinAmount { get; set; }
         //public DateTime CreatedDate { get; set; }
         //public DateTime ExpiryDate { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace OnlineRestaurant.Services.CouponAPI.Models.Dto
+﻿namespace OnlineRestaurant.Services.ShoppingCartAPI.Models.Dto
 {
     public class CouponDto
     {

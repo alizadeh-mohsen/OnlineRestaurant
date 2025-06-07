@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineRestaurant.Services.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineRestaurant.Services.ProductAPI", "OnlineRestaurant.Services.ProductAPI\OnlineRestaurant.Services.ProductAPI.csproj", "{B3FEABAF-55DC-4BAC-9D54-CFF922ED692B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineRestaurant.Services.ShoppingCartAPI", "OnlineRestaurant.Services.ShoppingCartAPI\OnlineRestaurant.Services.ShoppingCartAPI.csproj", "{9E0D01F5-20A7-48ED-BA4E-8A732348A313}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{B3FEABAF-55DC-4BAC-9D54-CFF922ED692B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3FEABAF-55DC-4BAC-9D54-CFF922ED692B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3FEABAF-55DC-4BAC-9D54-CFF922ED692B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E0D01F5-20A7-48ED-BA4E-8A732348A313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E0D01F5-20A7-48ED-BA4E-8A732348A313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E0D01F5-20A7-48ED-BA4E-8A732348A313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E0D01F5-20A7-48ED-BA4E-8A732348A313}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{7BF259EF-004E-4E87-BEDB-611CAC4395AB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{35FD1CE7-9EE4-4CE0-88CF-5F18F90F91B0} = {A90656CD-9F3C-400E-A836-151550E4664A}
 		{B3FEABAF-55DC-4BAC-9D54-CFF922ED692B} = {A90656CD-9F3C-400E-A836-151550E4664A}
+		{9E0D01F5-20A7-48ED-BA4E-8A732348A313} = {A90656CD-9F3C-400E-A836-151550E4664A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EB64403-7B6F-4090-9A8F-D6A0E2A8FDB5}

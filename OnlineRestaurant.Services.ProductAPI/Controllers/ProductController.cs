@@ -10,7 +10,7 @@ using OnlineRestaurant.Services.ProductAPI.Utils;
 namespace OnlineRestaurant.Services.ProductAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/Product")]
     public class ProductController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -85,6 +85,45 @@ namespace OnlineRestaurant.Services.ProductAPI.Controllers
                 });
             }
         }
+
+        [HttpGet("GetListOfProductsByIds")]
+        public async Task<ActionResult<ResponseDto>> GetListOfProductsByIds([FromBody] List<int> ids)
+        {
+            try
+            {
+                if (ids == null || !ids.Any())
+                {
+                    return BadRequest(new ResponseDto
+                    {
+                        IsSuccess = false,
+                        Message = "No product IDs provided."
+                    });
+                }
+                var products = await _context.Products.Where(p => ids.Contains(p.Id)).ToListAsync();
+                if (products == null || !products.Any())
+                {
+                    return NotFound(new ResponseDto
+                    {
+                        IsSuccess = false,
+                        Message = "No products found for the provided IDs."
+                    });
+                }
+                var responseDto = new ResponseDto
+                {
+                    Result = _autoMapper.Map<IEnumerable<ProductDto>>(products),
+                };
+                return Ok(responseDto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseDto
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                });
+            }
+        }
+
 
         [HttpPost]
         [Authorize(Roles = FixedResources.Admin)]

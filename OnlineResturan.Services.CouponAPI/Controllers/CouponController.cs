@@ -10,8 +10,8 @@ using OnlineRestaurant.Services.CouponAPI.Utils;
 namespace OnlineRestaurant.Services.CouponAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    [Authorize]
+    [Route("api/Coupon")]
+    //[Authorize]
     public class CouponController : ControllerBase
     {
         private readonly AppDbContext _dbContext;
