@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OnlineRestaurant.Services.ProductAPI.AutoMapper;
@@ -12,10 +11,7 @@ namespace OnlineRestaurant.Services.ProductAPI.Utils
     {
         public static WebApplicationBuilder AddCustomServcies(this WebApplicationBuilder builder)
         {
-
-            IMapper mapper = MappingConfigs.RegisterMaps().CreateMapper();
-            builder.Services.AddSingleton(mapper);
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {

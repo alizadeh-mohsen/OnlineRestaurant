@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -12,6 +13,7 @@ namespace OnlineRestaurant.Services.ShoppingCartAPI.Controllers
 {
     [ApiController]
     [Route("api/cart")]
+    //[Authorize]
     public class CartController : ControllerBase
     {
         private readonly AppDbContext _dbContext;
@@ -25,13 +27,6 @@ namespace OnlineRestaurant.Services.ShoppingCartAPI.Controllers
             _mapper = mapper;
             _productService = productService;
             _couponService = couponService;
-        }
-
-        [HttpGet("getOk")]
-        public IActionResult Get()
-        {
-
-            return Ok(new ResponseDto { IsSuccess = true, Result = "Shopping Cart API is running!" });
         }
 
         [HttpPost("Upsert")]
@@ -67,28 +62,28 @@ namespace OnlineRestaurant.Services.ShoppingCartAPI.Controllers
                 }
                 else
                 {
-                    _dbContext.CartDetails.RemoveRange(_dbContext.CartDetails.Where(c => c.CartHeaderId == existingCart.Id));
+                    var detailDto = _mapper.Map<CartDetail>(cartDto.CartDetails.FirstOrDefault());
+
+                    var dbCartDetail = await _dbContext.CartDetails.FirstOrDefaultAsync(c => c.CartHeaderId == existingCart.Id && c.ProductId == detailDto.ProductId);
+                    if (dbCartDetail == null)
+                    {
+                        detailDto.CartHeaderId = existingCart.Id;
+                        _dbContext.CartDetails.Add(detailDto);
+                    }
+
+                    else
+                    {
+                        dbCartDetail.Count += detailDto.Count;
+                        _dbContext.CartDetails.Update(dbCartDetail);
+                    }
                     await _dbContext.SaveChangesAsync();
-
-                    var newDetails = _mapper.Map<List<CartDetail>>(cartDto.CartDetails);
-                    newDetails.ForEach(detail => detail.CartHeaderId = existingCart.Id);
-                    newDetails.ForEach(detail => detail.Id = 0);
-
-                    _dbContext.CartDetails.AddRange(newDetails);
-                    _dbContext.SaveChanges();
 
                     return new ResponseDto
                     {
-                        Result = new ShoppingCartDto
-                        {
-                            CartHeader = _mapper.Map<CartHeaderDto>(existingCart),
-                            CartDetails = _mapper.Map<List<CartDetailDto>>(newDetails)
-                        },
+                        Result = true,
                         IsSuccess = true
                     };
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -178,6 +173,18 @@ namespace OnlineRestaurant.Services.ShoppingCartAPI.Controllers
                             }
                             header.CartTotal -= coupon.Discount;
                         }
+                        else {
+                            return new ResponseDto
+                            {
+                                IsSuccess = false,
+                                Result = new ShoppingCartDto()
+                                {
+                                    CartHeader = _mapper.Map<CartHeaderDto>(header),
+                                    CartDetails = _mapper.Map<List<CartDetailDto>>(details)
+                                },
+                                Message = "Invaild Coupon code"
+                            };
+                        }
                     }
 
 
@@ -194,7 +201,7 @@ namespace OnlineRestaurant.Services.ShoppingCartAPI.Controllers
                 return new ResponseDto
                 {
                     IsSuccess = false,
-                    Message = "Internal server error"
+                    Message = "Shopping Cart is empty"
                 };
             }
             catch (Exception ex)
@@ -227,6 +234,29 @@ namespace OnlineRestaurant.Services.ShoppingCartAPI.Controllers
             catch (Exception ex)
             {
                 return new ResponseDto { IsSuccess = false, Message = ex.Message };
+            }
+        }
+
+        [HttpPost("ClearCart")]
+        public async Task<ResponseDto> ClearCart(string UserId)
+        {
+            try
+            {
+                var cartHeader = await _dbContext.CartHeaders.FirstOrDefaultAsync(c => c.UserId == UserId);
+                _dbContext.CartDetails.RemoveRange(_dbContext.CartDetails.Where(c => c.CartHeaderId == cartHeader.Id));
+                _dbContext.CartHeaders.Remove(cartHeader);
+
+                await _dbContext.SaveChangesAsync();
+
+                return new ResponseDto { IsSuccess = true, Message = "Cart deleted successfully." };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDto
+                {
+                    IsSuccess = false,
+                    Message = ex.Message + " " + ex.InnerException?.Message
+                };
             }
         }
     }

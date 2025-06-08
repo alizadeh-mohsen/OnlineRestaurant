@@ -68,6 +68,9 @@ namespace OnlineRestaurant.MVC.Service
                     StatusCode = apiResponse.StatusCode
                 };
             }
+
+
+
             catch (Exception ex)
             {
                 return new ResponseDto

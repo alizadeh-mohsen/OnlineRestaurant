@@ -102,6 +102,7 @@ namespace OnlineRestaurant.MVC.Controllers
             }
         }
 
+
         private async Task<ProductDto> GetProductById(int id)
         {
             var response = await _productService.GetProductAsync(id);
